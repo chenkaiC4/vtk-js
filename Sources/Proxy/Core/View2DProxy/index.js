@@ -98,7 +98,7 @@ function vtkView2DProxy(publicAPI, model) {
   // -------------------------------------------------------------------------
 
   model.rangeManipulator = vtkMouseRangeManipulator.newInstance({
-    button: 1,
+    button: 3,
     scrollEnabled: true,
   });
   model.interactorStyle2D.addMouseManipulator(model.rangeManipulator);
@@ -163,7 +163,7 @@ function vtkView2DProxy(publicAPI, model) {
           step = 1 / DEFAULT_STEP_WIDTH;
         }
 
-        model.rangeManipulator.setVerticalListener(
+        model.rangeManipulator.setHorizontalListener(
           min,
           max,
           step,
@@ -188,7 +188,7 @@ function vtkView2DProxy(publicAPI, model) {
           step = 1 / DEFAULT_STEP_WIDTH;
         }
 
-        model.rangeManipulator.setHorizontalListener(
+        model.rangeManipulator.setVerticalListener(
           min,
           max,
           step,
