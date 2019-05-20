@@ -15,50 +15,51 @@ const MANIPULTOR_TYPES = {
 
 const STYLES = {
   '3D': [
-    { type: 'rotate' },
-    { type: 'pan', options: { button: 1 } },
-    { type: 'zoom', options: { button: 2 } },
-    { type: 'roll', options: { button: 3 } },
-    { type: 'zoom', options: { dragEnabled: false, scrollEnabled: true } },
-    { type: 'vrPan' },
-    { type: 'gestureCamera' },
+    {type: 'rotate'},
+    // { type: 'pan', options: { button: 1 } },
+    // { type: 'zoom', options: { button: 2 } },
+    // { type: 'roll', options: { button: 3 } },
+    {type: 'zoom', options: {dragEnabled: false, scrollEnabled: true}},
+    // { type: 'vrPan' },
+    // { type: 'gestureCamera' },
   ],
   '2D': [
-    { type: 'pan', options: { button: 1 } },
-    { type: 'zoom', options: { button: 2 } },
-    { type: 'vrPan' },
-    { type: 'gestureCamera' },
+    {type: 'pan', options: {button: 1}},
+    // { type: 'zoom', options: { button: 2 } },
+    // { type: 'roll', options: { button: 3 } },
+    // { type: 'vrPan' },
+    // { type: 'gestureCamera' },
   ],
 };
 
-function applyDefinitions(definitions, manipulatorStyle) {
-  manipulatorStyle.removeAllManipulators();
+function applyDefinitions (definitions, manipulatorStyle) {
+  manipulatorStyle.removeAllManipulators ();
   for (let idx = 0; idx < definitions.length; idx++) {
     const definition = definitions[idx];
-    const instance = MANIPULTOR_TYPES[definition.type].newInstance(
+    const instance = MANIPULTOR_TYPES[definition.type].newInstance (
       definition.options
     );
-    if (instance.isA('vtkCompositeVRManipulator')) {
-      manipulatorStyle.addVRManipulator(instance);
-    } else if (instance.isA('vtkCompositeGestureManipulator')) {
-      manipulatorStyle.addGestureManipulator(instance);
+    if (instance.isA ('vtkCompositeVRManipulator')) {
+      manipulatorStyle.addVRManipulator (instance);
+    } else if (instance.isA ('vtkCompositeGestureManipulator')) {
+      manipulatorStyle.addGestureManipulator (instance);
     } else {
-      manipulatorStyle.addMouseManipulator(instance);
+      manipulatorStyle.addMouseManipulator (instance);
     }
   }
 
   return true;
 }
 
-function applyPreset(name, manipulatorStyle) {
-  return applyDefinitions(STYLES[name], manipulatorStyle);
+function applyPreset (name, manipulatorStyle) {
+  return applyDefinitions (STYLES[name], manipulatorStyle);
 }
 
-function registerManipulatorType(type, classDef) {
+function registerManipulatorType (type, classDef) {
   MANIPULTOR_TYPES[type] = classDef;
 }
 
-function registerStylePreset(name, definitions) {
+function registerStylePreset (name, definitions) {
   STYLES[name] = definitions;
 }
 
